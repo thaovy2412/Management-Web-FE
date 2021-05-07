@@ -1,0 +1,18 @@
+.table {
+  margin-top: 15px;
+  color: #858796;
+  table-layout: fixed;
+  tbody {
+    tr {
+      th{
+        vertical-align: middle;
+      }
+      td {
+        vertical-align: middle;
+      }
+    }
+  }
+}
+pagination-controls {
+  text-align: end;
+}

@@ -1,0 +1,118 @@
+.management {
+  background-color: #f8f9fc;
+  display: flex;
+  #sidebar {
+    width: 20%;
+    min-height: 100vh;
+    background-color: #4e73df;
+    position: fixed;
+    .sidebar-brand {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      padding: 20px 16px;
+      background-color: #224abe;
+      .imgIcon {
+        border-radius: 50%;
+      }
+      p {
+        margin-top: 15px;
+      }
+    }
+    .menu {
+      list-style: none;
+      padding-left: 0;
+      li {
+        padding: 20px 25px;
+        position: relative;
+        cursor: pointer;
+        a {
+          display: flex;
+          align-items: center;
+          mat-icon {
+            margin-right: 10px;
+          }
+        }
+        &.active {
+          a {
+            color: #fff;
+            font-weight: 500;
+          }
+        }
+        &:hover {
+          a {
+            color: #fff;
+            font-weight: 500;
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+        &::after {
+          content: "";
+          background: rgba(255, 255, 255, 0.15);
+          height: 1px;
+          width: 94%;
+          bottom: 0;
+          left: 3%;
+          position: absolute;
+        }
+        a {
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
+  }
+  .content {
+    width: 80%;
+    height: 100%;
+    margin-left: 20%;
+    .navbar {
+      padding: 11px;
+      background-color: #fff;
+      box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+      position: fixed;
+      width: 80%;
+      z-index: 100;
+      .path {
+        margin-bottom: 0;
+        .iconHome {
+          margin-right: 10px;
+        }
+        .iconRight {
+          margin: 0 10px;
+        }
+        span {
+          color: #000;
+          font-weight: 500;
+        }
+      }
+      form {
+        input {
+          background-color: #f8f9fc;
+          border: none;
+          &:focus {
+            box-shadow: none;
+          }
+        }
+        button {
+          background-color: #4e73df;
+          border-color: #4e73df;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          color: #fff;
+          transition: all 0.5s;
+          &:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+          }
+        }
+      }
+    }
+    .content__detail {
+      margin-top: 60px;
+      padding: 24px;
+    }
+  }
+}

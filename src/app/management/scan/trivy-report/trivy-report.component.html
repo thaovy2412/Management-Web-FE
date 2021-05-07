@@ -1,0 +1,77 @@
+<div class="accordion" id="accordionExample">
+  <div class="card" *ngFor="let data of dataReport">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button
+          (click)="changeType(data.Type)"
+          class="btn btn-link btn-block text-left collapsed"
+          type="button"
+          data-toggle="collapse"
+          [attr.data-target]="'#' + data.Type"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          {{ data.Target }}
+        </button>
+      </h2>
+    </div>
+    <div
+      [id]="data.Type"
+      class="collapse"
+      aria-labelledby="headingTwo"
+      data-parent="#accordionExample"
+    >
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Library</th>
+              <th>Vulnerability ID</th>
+              <th>Severity</th>
+              <th>Installed Version</th>
+              <th>Fixed Version</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let vuln of data.Vulnerabilities
+                  | paginate: { id: data.Type, itemsPerPage: 5, currentPage: p }
+              "
+            >
+              <td>{{ vuln.PkgName }}</td>
+              <td>{{ vuln.VulnerabilityID }}</td>
+              <td>{{ vuln.Severity }}</td>
+              <td>{{ vuln.InstalledVersion }}</td>
+              <td>{{ vuln.FixedVersion }}</td>
+              <td>
+                {{ vuln.Title }}<br /><a
+                  [href]="vuln.PrimaryURL"
+                  target="_blank"
+                  >{{ vuln.PrimaryURL }}</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls
+          *ngIf="type === data.Type"
+          [id]="data.Type"
+          (pageChange)="pageChanged($event)"
+          (pageBoundsCorrection)="pageChanged($event)"
+          maxSize="9"
+          directionLinks="true"
+          autoHide="true"
+          responsive="true"
+          previousLabel="Previous"
+          nextLabel="Next"
+          screenReaderPaginationLabel="Pagination"
+          screenReaderPageLabel="page"
+          screenReaderCurrentLabel="You're on page"
+        >
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

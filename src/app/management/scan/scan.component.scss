@@ -1,0 +1,44 @@
+h2{
+  font-weight: 400;
+  color: #5a5c69;
+}
+
+.card{
+  border: 1px solid #e3e6f0;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+  .card-header{
+    padding: 16px 20px;
+    h4{
+      color: #4e73df;
+      margin-bottom: 0;
+    }
+    border-bottom: 1px solid #e3e6f0;
+  }
+  .card-body{
+    .pathCommit{
+      margin-bottom: 20px;
+      span{
+        margin-bottom: 20px;
+        color: #4e73df;
+        cursor: pointer;
+        &.disabledClick{
+          pointer-events: none;
+        }
+        &:hover{
+          text-decoration: underline;
+        }
+        &.commitID{
+          font-weight: 500;
+        }
+        &.slash{
+          color: #5a5c69;
+          pointer-events: none;
+        }
+        &.tool{
+          color: #000;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

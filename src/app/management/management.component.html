@@ -1,0 +1,48 @@
+<section class="management">
+  <nav id="sidebar">
+    <div class="sidebar-brand">
+      <img class="imgIcon" src="../../assets/icon.jpg" width="80" height="80">
+      <p>User</p>
+    </div>
+    <ul class="menu">
+      <li routerLink=''
+        (click)="setOption('Dashboard')"
+        [class]="{ active: option === 'Dashboard' }"
+      >
+        <a routerLink='' (click)="setOption('Dashboard')"><mat-icon>dashboard</mat-icon> Dashboard</a>
+      </li>
+      <li routerLink='/scan/commits' (click)="setOption('Scan Report')" [class]="{ active: option === 'Scan Report' }">
+        <a routerLink='/scan/commits' (click)="setOption('Scan Report')"><mat-icon>report</mat-icon> Scan Report</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <p class="path">
+          <fa-icon class="iconHome" [icon]="faHome"></fa-icon>Home<fa-icon
+            [icon]="faRight" class="iconRight"
+          ></fa-icon
+          ><span>{{ option }}</span>
+        </p>
+        <form>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search for..."
+            />
+            <div class="input-group-btn">
+              <button class="btn btn-default">
+                <fa-icon [icon]="faSearch"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </nav>
+    <div class="content__detail">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>

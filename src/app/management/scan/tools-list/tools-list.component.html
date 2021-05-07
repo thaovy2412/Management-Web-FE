@@ -1,0 +1,18 @@
+<table class="table table-bordered">
+  <thead>
+    <th>Scanners</th>
+    <th>High</th>
+    <th>Medium</th>
+    <th>Low</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tool of tools">
+      <td>{{tool}}</td>
+      <td class="high"><p>2</p></td>
+      <td class="medium"><p>none</p></td>
+      <td class="low"><p>3</p></td>
+      <td><button routerLink="/scan/{{tool | lowercase}}-report" class="btn" (click)="setTool(tool)">Detail</button></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,27 @@
+<h2>Tables</h2>
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur veniam quis
+  reiciendis ex earum, delectus quia at odit. Voluptates, quia?
+</p>
+<div class="card">
+  <div class="card-header">
+    <h4>DataTables Example</h4>
+  </div>
+  <div class="card-body">
+    <div class="pathCommit">
+      <span
+        [ngClass]="{ disabledClick: !commitID }"
+        routerLink="/scan/commits"
+        (click)="resetCommitID()"
+        >Commit</span
+      >
+      <span *ngIf="commitID" class="slash"> / </span>
+      <span class="commitID" routerLink="/scan/tools" (click)="resetTool()">{{
+        commitID
+      }}</span>
+      <span *ngIf="tool" class="slash"> / </span>
+      <span *ngIf="tool" class="tool">{{ tool }}</span>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+.table{
+  margin-top: 15px;
+  color: #858796;
+  text-align: center;
+  tbody{
+    tr{
+      td{
+        vertical-align: middle;
+        p{
+          margin-bottom: 0;
+          color: #fff;
+          border-radius: 25px;
+        }
+        &:first-child{
+          text-align: left;
+        }
+        &.high{
+          p{
+            background-color: #dc3545;
+          }
+        }
+        &.medium{
+          p{
+            background-color: #ffc107;
+          }
+        }
+        &.low{
+          p{
+            background-color: #17a2b8;
+          }
+        }
+        &:nth-child(6){
+          text-align: left;
+        }
+      }
+      button{
+        background-color: #4e73df;
+        color: #fff;
+        border-radius: 0;
+        transition: all 0.5s;
+        &:hover{
+          background-color: #2e59d9;
+        }
+      }
+    }
+  }
+}
