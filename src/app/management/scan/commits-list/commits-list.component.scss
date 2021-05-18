@@ -1,47 +1,57 @@
-.table{
+.table {
   margin-top: 15px;
   color: #858796;
   text-align: center;
-  tbody{
-    tr{
-      td{
+  table-layout: fixed;
+  margin-bottom: 40px;
+  thead {
+    th {
+      &:first-child {
+        width: 40%;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
         vertical-align: middle;
-        p{
-          margin-bottom: 0;
-          color: #fff;
-          border-radius: 25px;
-        }
-        &:first-child{
+        &:first-child {
           text-align: left;
         }
-        &.high{
-          p{
-            background-color: #dc3545;
+        &.status {
+          p {
+            margin-bottom: 0;
+            color: #fff;
+            border-radius: 25px;
+            width: 50%;
+            padding: 5px;
+            margin: auto;
+            &.pass {
+              background-color: #05be05;
+            }
+            &.fail {
+              background-color: #dc3545;
+            }
+            &.running {
+              background-color: #2e59d9;
+            }
           }
-        }
-        &.medium{
-          p{
-            background-color: #ffc107;
-          }
-        }
-        &.low{
-          p{
-            background-color: #17a2b8;
-          }
-        }
-        &:nth-child(6){
-          text-align: left;
         }
       }
-      button{
+      button {
+        font-size: 14px;
         background-color: #4e73df;
         color: #fff;
         border-radius: 0;
         transition: all 0.5s;
-        &:hover{
+        &:hover {
           background-color: #2e59d9;
         }
       }
     }
   }
+}
+
+pagination-controls {
+  text-align: right;
 }

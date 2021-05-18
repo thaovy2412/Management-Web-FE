@@ -1,3 +1,4 @@
+import { Total } from './../../../core/models/trivy';
 import { Component, OnInit } from '@angular/core';
 import { TrivyReport } from 'src/app/core/models/trivy';
 import { ReportService } from 'src/app/core/services/report.service';
@@ -15,12 +16,35 @@ export class TrivyReportComponent implements OnInit {
   constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
-    this.reportService.fetchReport('./trivy-report.json').subscribe({
-      next: (result) => {
-        this.dataReport = result;
-        console.log(this.dataReport);
-      },
-    });
+    this.reportService.commitID.subscribe({
+      next: (id) => {
+        this.reportService.tool.subscribe({
+          next: (tool) =>{
+            this.reportService.fetchDetailReport(id,tool.toLowerCase()).subscribe({
+              next: (result) => {
+                this.dataReport = result;
+                this.dataReport.forEach((target) => {
+                  let summary: Total ={
+                    total: target.Vulnerabilities.length,
+                    unknown: 0,
+                    low: 0,
+                    medium: 0,
+                    high: 0,
+                    critical: 0
+                  }
+                  target.Vulnerabilities.forEach((vuln)=>{
+                    summary[vuln.Severity.toLowerCase()]++;
+                  })
+                  target.Summary = summary;
+                })
+                console.log(this.dataReport);
+
+              }
+            })
+          }
+        })
+      }
+    })
   }
 
   pageChanged(p: any): void{

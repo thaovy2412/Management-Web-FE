@@ -19,5 +19,14 @@ export interface TrivyReport{
   Target: string;
   Type: string;
   Vulnerabilities: Vulnerability[];
-  Total?: number;
+  Summary?: Total;
+}
+
+export interface Total{
+  total: number;
+  unknown: number;
+  low: number;
+  medium: number;
+  high: number;
+  critical: number;
 }

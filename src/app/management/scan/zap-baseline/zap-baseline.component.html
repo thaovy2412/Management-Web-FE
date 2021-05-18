@@ -1,0 +1,190 @@
+<h3>Generated on {{data['@generated']}}</h3>
+<div class="summaryAlerts">
+  <h4>Summary of Alerts</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th width="50%">Risk Level</th>
+        <th>Number of Alerts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let level of summaryAlerts">
+        <td>{{level.riskLevel}}</td>
+        <td>{{level.numberAlerts}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="alerts">
+  <h4>Alerts</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th width="50%">Name</th>
+        <th width="25%">Risk Level</th>
+        <th>Number of Instances</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alert of overviewZapReport">
+        <td>{{alert.name}}</td>
+        <td>{{alert.riskLevel}}</td>
+        <td>{{alert.numberInstances}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- <div class="alertDetail">
+  <h4>Alert Detail</h4>
+  <table *ngFor="let item of data?.OWASPZAPReport.site[0].alerts[0].alertitem" class="table table-bordered">
+    <thead>
+      <tr>
+        <th width="20%">{{ item.riskdesc }}</th>
+        <th>{{ item.name }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Description</td>
+        <td [innerHTML]="item.desc"></td>
+      </tr>
+      <ng-container *ngFor="let instance of item.instances[0].instance">
+        <tr>
+          <td>URL</td>
+          <td>{{ instance.uri }}</td>
+        </tr>
+        <tr>
+          <td>Method</td>
+          <td>{{ instance.method }}</td>
+        </tr>
+        <tr *ngIf="instance.param">
+          <td>Parameter</td>
+          <td>{{ instance.param }}</td>
+        </tr>
+        <tr *ngIf="instance.attack">
+          <td>Attack</td>
+          <td>{{ instance.attack }}</td>
+        </tr>
+        <tr *ngIf="instance.evidence">
+          <td>Evidence</td>
+          <td>{{ instance.evidence }}</td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td>Instances</td>
+        <td>{{ item.count }}</td>
+      </tr>
+      <tr>
+        <td>Solution</td>
+        <td [innerHTML]="item.solution"></td>
+      </tr>
+      <tr *ngIf="item.otherinfo">
+        <td>Other information</td>
+        <td [innerHTML]="item.otherinfo"></td>
+      </tr>
+      <tr>
+        <td>Reference</td>
+        <td [innerHTML]="item.reference"></td>
+      </tr>
+      <tr *ngIf="item.cweid">
+        <td>CWE Id</td>
+        <td>{{ item.cweid }}</td>
+      </tr>
+      <tr *ngIf="item.wascid">
+        <td>WASC Id</td>
+        <td>{{ item.wascid }}</td>
+      </tr>
+      <tr>
+        <td>Source ID</td>
+        <td>{{ item.sourceid }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+<div class="alertDetail">
+  <h4>Alert Detail</h4>
+  <div id="accordion">
+    <div *ngFor="let level of summaryAlerts" class="card">
+      <div [ngClass]="level.riskLevel.toLowerCase()" class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button (click)="setLevelDetail(level.riskLevel)" class="btn btn-link collapsed" data-toggle="collapse" [attr.data-target]="'#'+level.riskLevel" aria-expanded="false" aria-controls="collapseThree">
+            {{level.riskLevel}} ({{level.numberAlerts}})
+          </button>
+        </h5>
+      </div>
+      <div [id]="level.riskLevel" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <ng-container *ngFor="let item of data.site[0].alerts">
+            <table *ngIf="item.riskcode===levelDetail" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th width="20%">{{ item.riskdesc }}</th>
+                  <th>{{ item.name }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Description</td>
+                  <td [innerHTML]="item.desc"></td>
+                </tr>
+                <ng-container *ngFor="let instance of item.instances">
+                  <tr>
+                    <td>URL</td>
+                    <td>{{ instance.uri }}</td>
+                  </tr>
+                  <tr>
+                    <td>Method</td>
+                    <td>{{ instance.method }}</td>
+                  </tr>
+                  <tr *ngIf="instance.param">
+                    <td>Parameter</td>
+                    <td>{{ instance.param }}</td>
+                  </tr>
+                  <tr *ngIf="instance.attack">
+                    <td>Attack</td>
+                    <td>{{ instance.attack }}</td>
+                  </tr>
+                  <tr *ngIf="instance.evidence">
+                    <td>Evidence</td>
+                    <td>{{ instance.evidence }}</td>
+                  </tr>
+                </ng-container>
+                <tr>
+                  <td>Instances</td>
+                  <td>{{ item.count }}</td>
+                </tr>
+                <tr>
+                  <td>Solution</td>
+                  <td [innerHTML]="item.solution"></td>
+                </tr>
+                <tr *ngIf="item.otherinfo">
+                  <td>Other information</td>
+                  <td [innerHTML]="item.otherinfo"></td>
+                </tr>
+                <tr>
+                  <td>Reference</td>
+                  <td [innerHTML]="item.reference"></td>
+                </tr>
+                <tr *ngIf="item.cweid">
+                  <td>CWE Id</td>
+                  <td>{{ item.cweid }}</td>
+                </tr>
+                <tr *ngIf="item.wascid">
+                  <td>WASC Id</td>
+                  <td>{{ item.wascid }}</td>
+                </tr>
+                <tr>
+                  <td>Source ID</td>
+                  <td>{{ item.sourceid }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

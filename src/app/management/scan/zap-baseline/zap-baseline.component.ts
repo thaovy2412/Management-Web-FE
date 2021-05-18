@@ -1,19 +1,15 @@
-import {
-  OWASPZAPReport,
-  ZapReportOverView,
-  ZapReportSummary,
-} from './../../../core/models/zap';
+import { ReportService } from './../../../core/services/report.service';
+import { ZapReportDetail, ZapReportOverView, ZapReportSummary } from './../../../core/models/zap';
 import { Component, OnInit } from '@angular/core';
-import { ZapReportDetail } from 'src/app/core/models/zap';
-import { ReportService } from 'src/app/core/services/report.service';
+import { ZapBaselineReport } from 'src/app/core/models/zap-baseline';
 
 @Component({
-  selector: 'app-zap-report',
-  templateUrl: './zap-report.component.html',
-  styleUrls: ['./zap-report.component.scss'],
+  selector: 'app-zap-baseline',
+  templateUrl: './zap-baseline.component.html',
+  styleUrls: ['./zap-baseline.component.scss']
 })
-export class ZapReportComponent implements OnInit {
-  data: ZapReportDetail | undefined = undefined;
+export class ZapBaselineComponent implements OnInit {
+  data: ZapBaselineReport | undefined = undefined;
   overviewZapReport: ZapReportOverView[] = [];
   summaryAlerts: ZapReportSummary[] = [
     {
@@ -34,23 +30,27 @@ export class ZapReportComponent implements OnInit {
     },
   ];
   levelDetail: string = '';
-  constructor(private reportService: ReportService) {}
+  constructor(private ReportService: ReportService) {}
 
   ngOnInit(): void {
-    this.reportService.commitID.subscribe({
+    this.ReportService.commitID.subscribe({
       next: (id) => {
-        this.reportService.tool.subscribe({
+        this.ReportService.tool.subscribe({
           next: (tool) => {
-            this.reportService
+            this.ReportService
               .fetchDetailReport(id, tool.toLowerCase().replace(' ', '-'))
               .subscribe({
                 next: (result) => {
                   this.data = result;
-                  this.data.OWASPZAPReport?.site[0].alerts[0].alertitem.sort(
+                  this.data.site[0].alerts.sort(
                     (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
                   );
                   this.overviewReport();
                   this.summaryReport();
+                  console.log('overview',this.overviewZapReport);
+                  console.log('summary', this.summaryAlerts);
+
+
                 },
               });
           },
@@ -60,21 +60,21 @@ export class ZapReportComponent implements OnInit {
   }
 
   overviewReport(): void {
-    for (let alert of this.data.OWASPZAPReport.site[0].alerts[0].alertitem) {
+    for (let alert of this.data.site[0].alerts) {
       const index = this.overviewZapReport.findIndex(
-        (e) => e.name === alert.name[0]
+        (e) => e.name === alert.name
       );
       if (index != -1) {
         this.overviewZapReport[index].numberInstances = (
           parseInt(this.overviewZapReport[index].numberInstances) +
-          parseInt(alert.count[0])
-        ).toString()[0];
+          parseInt(alert.count)
+        ).toString();
       } else {
         const item: ZapReportOverView = {
-          name: alert.name[0],
-          riskLevel: alert.riskdesc[0].replace(/ *\([^)]*\) */g, ''),
-          riskCode: alert.riskcode[0],
-          numberInstances: alert.count[0],
+          name: alert.name,
+          riskLevel: alert.riskdesc.replace(/ *\([^)]*\) */g, ''),
+          riskCode: alert.riskcode,
+          numberInstances: alert.count,
         };
         this.overviewZapReport.push(item);
       }
@@ -86,8 +86,8 @@ export class ZapReportComponent implements OnInit {
   }
 
   summaryReport(): void {
-    for (let alert of this.data.OWASPZAPReport.site[0].alerts[0].alertitem) {
-      const type = this.mapCodeToName(alert.riskcode[0]);
+    for (let alert of this.data.site[0].alerts) {
+      const type = this.mapCodeToName(alert.riskcode);
       const index = this.summaryAlerts.findIndex((e) => e.riskLevel === type);
       this.summaryAlerts[index].numberAlerts = (
         parseInt(this.summaryAlerts[index].numberAlerts) + 1
@@ -128,18 +128,6 @@ export class ZapReportComponent implements OnInit {
         break;
     }
   }
-
-  // sortRiskLevel(level: string[]): ZapReportOverView[] {
-  //   let result: ZapReportOverView[] = [];
-  //   level.forEach((l) => {
-  //     for (let item of this.overviewZapReport) {
-  //       if (item.riskLevel === l) {
-  //         result.push(item);
-  //       }
-  //     }
-  //   });
-  //   return result;
-  // }
 
   setLevelDetail(level: string): void {
     const code = this.mapNameToCode(level);

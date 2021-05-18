@@ -14,14 +14,19 @@ export class GitleaksReportComponent implements OnInit {
   constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
-    this.reportService.fetchReport('./gitleaks-report.json').subscribe({
-      next: (result) => {
-        this.data = result;
-        console.log('result', result);
-
-        console.log('Gitleaks', this.data);
-      },
-    });
+    this.reportService.commitID.subscribe({
+      next: (id) => {
+        this.reportService.tool.subscribe({
+          next: (tool) =>{
+            this.reportService.fetchDetailReport(id,tool.toLowerCase()).subscribe({
+              next: (result) => {
+                this.data = result;
+              }
+            })
+          }
+        })
+      }
+    })
   }
 
   checkURL(key: string): boolean {

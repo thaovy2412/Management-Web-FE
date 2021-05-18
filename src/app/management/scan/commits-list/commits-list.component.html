@@ -3,22 +3,30 @@
     <tr>
       <th>Commit ID</th>
       <th>Status</th>
-      <th>High</th>
-      <th>Medium</th>
-      <th>Low</th>
       <th>Date Time</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let commit of commits">
-      <td>{{commit.commitId}}</td>
-      <td>{{commit.status}}</td>
-      <td class="high"><p>5</p></td>
-      <td class="medium"><p>none</p></td>
-      <td class="low"><p>3</p></td>
+    <tr *ngFor="let commit of dataReport | paginate: {itemsPerPage: 5, currentPage: p}">
+      <td>{{commit.commitid}}</td>
+      <td class="status"><p [class]="commit.status">{{commit.status}}</p></td>
       <td>{{commit.date}}</td>
-      <td><button routerLink="/scan/tools" (click)="selectCommit(commit.commitId)" class="btn">Detail</button></td>
+      <td><button routerLink="/scan/tools" (click)="selectCommit(commit.commitid)" class="btn">Detail</button></td>
     </tr>
   </tbody>
 </table>
+
+<pagination-controls
+                      (pageChange)="pageChanged($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      maxSize="9"
+                      directionLinks="true"
+                      autoHide="true"
+                      responsive="true"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+</pagination-controls>

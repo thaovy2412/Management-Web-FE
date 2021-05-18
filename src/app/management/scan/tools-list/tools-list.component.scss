@@ -2,6 +2,14 @@
   margin-top: 15px;
   color: #858796;
   text-align: center;
+  table-layout: fixed;
+  thead {
+    th {
+      &:first-child {
+        width: 50%;
+      }
+    }
+  }
   tbody{
     tr{
       td{
@@ -10,6 +18,25 @@
           margin-bottom: 0;
           color: #fff;
           border-radius: 25px;
+          width: 50%;
+            padding: 5px;
+            margin: auto;
+        }
+        &.status{
+          p{
+            &.pass{
+              background-color: #05be05;
+            }
+            &.fail{
+              background-color: #dc3545;
+            }
+            &.skip{
+              background-color: #ffc107;
+            }
+            &.running{
+              background-color: #2e59d9;
+            }
+          }
         }
         &:first-child{
           text-align: left;
@@ -19,25 +46,13 @@
             background-color: #dc3545;
           }
         }
-        &.medium{
-          p{
-            background-color: #ffc107;
-          }
-        }
-        &.low{
-          p{
-            background-color: #17a2b8;
-          }
-        }
-        &:nth-child(6){
-          text-align: left;
-        }
       }
       button{
         background-color: #4e73df;
         color: #fff;
         border-radius: 0;
         transition: all 0.5s;
+        font-size: 14px;
         &:hover{
           background-color: #2e59d9;
         }

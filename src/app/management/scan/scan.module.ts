@@ -10,11 +10,12 @@ import { TrivyReportComponent } from './trivy-report/trivy-report.component';
 import { GitleaksReportComponent } from './gitleaks-report/gitleaks-report.component';
 import { SonarqubeReportComponent } from './sonarqube-report/sonarqube-report.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ZapBaselineComponent } from './zap-baseline/zap-baseline.component';
 
 
 
 @NgModule({
-  declarations: [ScanComponent, CommitsListComponent, ToolsListComponent, ZapReportComponent, TrivyReportComponent, GitleaksReportComponent, SonarqubeReportComponent],
+  declarations: [ScanComponent, CommitsListComponent, ToolsListComponent, ZapReportComponent, TrivyReportComponent, GitleaksReportComponent, SonarqubeReportComponent, ZapBaselineComponent],
   imports: [
     CommonModule,
     ScanRoutingModule,
