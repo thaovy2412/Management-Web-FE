@@ -6,9 +6,23 @@
   </thead>
   <tbody>
     <tr *ngFor="let tool of selectedCommitDetail">
-      <td>{{tool.name}}</td>
-      <td class="status"><p [class]="tool.status">{{tool.status}}</p></td>
-      <td><button routerLink="/scan/{{tool.path}}" class="btn" (click)="setTool(tool.name)">Detail</button></td>
+      <td>{{ tool.name }}</td>
+      <td class="status">
+        <p [class]="tool.status">{{ tool.status }}</p>
+      </td>
+      <td>
+        <button class="btn sonar" *ngIf="tool.param === 'sonarqube'">
+          <a [href]="sonarUrl" target="_blank">Detail</a>
+        </button>
+        <button
+          *ngIf="tool.param !== 'sonarqube'"
+          routerLink="/scan/commits"
+          [queryParams]="{ id: commitid, tool: tool.param }"
+          class="btn"
+        >
+          Detail
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

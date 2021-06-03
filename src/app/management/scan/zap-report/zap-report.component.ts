@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import {
   OWASPZAPReport,
   ZapReportOverView,
@@ -34,29 +35,21 @@ export class ZapReportComponent implements OnInit {
     },
   ];
   levelDetail: string = '';
-  constructor(private reportService: ReportService) {}
+  constructor(private reportService: ReportService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.reportService.commitID.subscribe({
-      next: (id) => {
-        this.reportService.tool.subscribe({
-          next: (tool) => {
-            this.reportService
-              .fetchDetailReport(id, tool.toLowerCase().replace(' ', '-'))
-              .subscribe({
-                next: (result) => {
-                  this.data = result;
+    this.route.queryParams.subscribe(params=>{
+      this.reportService.fetchDetailReport(params['id'],params['tool']).subscribe({
+        next: (result)=>{
+          this.data = result;
                   this.data.OWASPZAPReport?.site[0].alerts[0].alertitem.sort(
                     (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
                   );
                   this.overviewReport();
                   this.summaryReport();
-                },
-              });
-          },
-        });
-      },
-    });
+        }
+      })
+    })
   }
 
   overviewReport(): void {
@@ -79,7 +72,6 @@ export class ZapReportComponent implements OnInit {
         this.overviewZapReport.push(item);
       }
     }
-    // this.overviewZapReport = this.sortRiskLevel(['High', 'Medium', 'Low']);
     this.overviewZapReport.sort(
       (a, b) => parseInt(b.riskCode) - parseInt(a.riskCode)
     );
@@ -128,18 +120,6 @@ export class ZapReportComponent implements OnInit {
         break;
     }
   }
-
-  // sortRiskLevel(level: string[]): ZapReportOverView[] {
-  //   let result: ZapReportOverView[] = [];
-  //   level.forEach((l) => {
-  //     for (let item of this.overviewZapReport) {
-  //       if (item.riskLevel === l) {
-  //         result.push(item);
-  //       }
-  //     }
-  //   });
-  //   return result;
-  // }
 
   setLevelDetail(level: string): void {
     const code = this.mapNameToCode(level);

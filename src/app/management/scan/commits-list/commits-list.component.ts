@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DataReport } from 'src/app/core/models/commits';
 import { ReportService } from 'src/app/core/services/report.service';
 
@@ -10,14 +11,12 @@ import { ReportService } from 'src/app/core/services/report.service';
 export class CommitsListComponent implements OnInit {
   dataReport : DataReport[] | undefined = undefined;
   p: number = 1;
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.reportService.fetchDataReport().subscribe({
+    this.reportService.dataReport.subscribe({
       next: (result) => {
         this.dataReport = result;
-        console.log(this.dataReport);
-        this.reportService.dataReport.next(this.dataReport);
       }
     })
   }

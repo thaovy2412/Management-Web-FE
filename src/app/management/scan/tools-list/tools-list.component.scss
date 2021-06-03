@@ -1,4 +1,4 @@
-.table{
+.table {
   margin-top: 15px;
   color: #858796;
   text-align: center;
@@ -10,51 +10,60 @@
       }
     }
   }
-  tbody{
-    tr{
-      td{
+  tbody {
+    tr {
+      td {
         vertical-align: middle;
-        p{
+        p {
           margin-bottom: 0;
           color: #fff;
           border-radius: 25px;
           width: 50%;
-            padding: 5px;
-            margin: auto;
+          padding: 5px;
+          margin: auto;
         }
-        &.status{
-          p{
-            &.pass{
+        &.status {
+          p {
+            &.pass {
               background-color: #05be05;
             }
-            &.fail{
+            &.fail {
               background-color: #dc3545;
             }
-            &.skip{
+            &.skip {
               background-color: #ffc107;
             }
-            &.running{
+            &.running {
               background-color: #2e59d9;
             }
           }
         }
-        &:first-child{
+        &:first-child {
           text-align: left;
         }
-        &.high{
-          p{
+        &.high {
+          p {
             background-color: #dc3545;
           }
         }
       }
-      button{
+      button {
         background-color: #4e73df;
         color: #fff;
         border-radius: 0;
         transition: all 0.5s;
         font-size: 14px;
-        &:hover{
+        &:hover {
           background-color: #2e59d9;
+        }
+        &.sonar {
+          a {
+            color: #fff;
+            &:hover {
+              color: #fff;
+              text-decoration: none;
+            }
+          }
         }
       }
     }

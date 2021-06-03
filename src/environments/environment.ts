@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: window["env"]["apiUrl"] || "default",
-  debug: window["env"]["debug"] || false
+  apiUrl: window['env']['apiUrl'] || 'default',
+  sonarUrl: window['env']['sonarUrl'] || 'default',
+  debug: window['env']['debug'] || false,
 };
 
 /*

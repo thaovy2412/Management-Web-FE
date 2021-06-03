@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Total } from './../../../core/models/trivy';
 import { Component, OnInit } from '@angular/core';
 import { TrivyReport } from 'src/app/core/models/trivy';
@@ -13,16 +14,13 @@ export class TrivyReportComponent implements OnInit {
   p: number = 1;
   type: string = "";
 
-  constructor(private reportService: ReportService) {}
+  constructor(private reportService: ReportService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.reportService.commitID.subscribe({
-      next: (id) => {
-        this.reportService.tool.subscribe({
-          next: (tool) =>{
-            this.reportService.fetchDetailReport(id,tool.toLowerCase()).subscribe({
-              next: (result) => {
-                this.dataReport = result;
+    this.route.queryParams.subscribe(params=>{
+      this.reportService.fetchDetailReport(params['id'],params['tool']).subscribe({
+        next: (result)=>{
+          this.dataReport = result;
                 this.dataReport.forEach((target) => {
                   let summary: Total ={
                     total: target.Vulnerabilities.length,
@@ -38,12 +36,8 @@ export class TrivyReportComponent implements OnInit {
                   target.Summary = summary;
                 })
                 console.log(this.dataReport);
-
-              }
-            })
-          }
-        })
-      }
+        }
+      })
     })
   }
 

@@ -11,17 +11,23 @@
     <div class="pathCommit">
       <span
         [ngClass]="{ disabledClick: !commitID }"
+        (click)='resetCommitID()'
         routerLink="/scan/commits"
-        (click)="resetCommitID()"
         >Commit</span
       >
       <span *ngIf="commitID" class="slash"> / </span>
-      <span class="commitID" routerLink="/scan/tools" (click)="resetTool()">{{
+      <span class="commitID" (click)="resetTool()" routerLink="/scan/commits" [queryParams]="{id:commitID}"  >{{
         commitID
       }}</span>
       <span *ngIf="tool" class="slash"> / </span>
-      <span *ngIf="tool" class="tool">{{ tool }}</span>
+      <span *ngIf="tool" class="tool" >{{ tool }}</span>
     </div>
-    <router-outlet></router-outlet>
+    <app-commits-list *ngIf="!commitID"></app-commits-list>
+    <app-tools-list *ngIf="commitID && !tool"></app-tools-list>
+    <app-gitleaks-report *ngIf="tool==='gitleaks'"></app-gitleaks-report>
+    <app-zap-baseline *ngIf="tool==='zap-baseline'"></app-zap-baseline>
+    <app-zap-report *ngIf="tool==='zap-quickscan'"></app-zap-report>
+    <app-trivy-report *ngIf="tool==='trivy'"></app-trivy-report>
+    <app-sonarqube-report *ngIf="tool==='sonarqube'"></app-sonarqube-report>
   </div>
 </div>

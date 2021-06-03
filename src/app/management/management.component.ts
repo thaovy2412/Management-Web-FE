@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -15,9 +16,14 @@ export class ManagementComponent implements OnInit {
   faRight=faChevronRight;
   faSearch=faSearch;
   faChart=faChartLine;
-  constructor() { }
+  url: string = '';
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.url = this.router.url;
+    if(this.url.includes('scan/commits')){
+      this.option='Scan Report';
+    }
   }
   setOption(option:string){
     this.option=option;

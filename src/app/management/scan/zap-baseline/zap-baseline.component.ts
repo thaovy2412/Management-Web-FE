@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { ReportService } from './../../../core/services/report.service';
 import { ZapReportDetail, ZapReportOverView, ZapReportSummary } from './../../../core/models/zap';
 import { Component, OnInit } from '@angular/core';
@@ -30,33 +31,24 @@ export class ZapBaselineComponent implements OnInit {
     },
   ];
   levelDetail: string = '';
-  constructor(private ReportService: ReportService) {}
+  constructor(private reportService: ReportService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.ReportService.commitID.subscribe({
-      next: (id) => {
-        this.ReportService.tool.subscribe({
-          next: (tool) => {
-            this.ReportService
-              .fetchDetailReport(id, tool.toLowerCase().replace(' ', '-'))
-              .subscribe({
-                next: (result) => {
-                  this.data = result;
-                  this.data.site[0].alerts.sort(
-                    (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
-                  );
-                  this.overviewReport();
-                  this.summaryReport();
-                  console.log('overview',this.overviewZapReport);
-                  console.log('summary', this.summaryAlerts);
-
-
-                },
-              });
-          },
-        });
-      },
-    });
+    this.route.queryParams.subscribe(params=>{
+      this.reportService.fetchDetailReport(params['id'],params['tool']).subscribe({
+        next: (result)=>{
+          this.data = result;
+          this.data = result;
+          this.data.site[0].alerts.sort(
+            (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
+          );
+          this.overviewReport();
+          this.summaryReport();
+          console.log('overview',this.overviewZapReport);
+          console.log('summary', this.summaryAlerts);
+        }
+      })
+    })
   }
 
   overviewReport(): void {
@@ -79,7 +71,6 @@ export class ZapBaselineComponent implements OnInit {
         this.overviewZapReport.push(item);
       }
     }
-    // this.overviewZapReport = this.sortRiskLevel(['High', 'Medium', 'Low']);
     this.overviewZapReport.sort(
       (a, b) => parseInt(b.riskCode) - parseInt(a.riskCode)
     );

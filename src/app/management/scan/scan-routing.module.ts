@@ -10,16 +10,8 @@ import { ZapReportComponent } from './zap-report/zap-report.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'commits',
     component: ScanComponent,
-    children: [
-      { path: 'commits', component: CommitsListComponent },
-      { path: 'tools', component: ToolsListComponent },
-      { path: 'trivy-report', component: TrivyReportComponent },
-      { path: 'gitleaks-report', component: GitleaksReportComponent },
-      { path: 'zap-quickscan-report', component: ZapReportComponent },
-      { path: 'zap-baseline-report', component: ZapBaselineComponent },
-    ],
   },
 ];
 

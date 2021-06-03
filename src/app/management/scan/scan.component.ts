@@ -1,3 +1,5 @@
+import { DataReport } from 'src/app/core/models/commits';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from 'src/app/core/services/report.service';
 
@@ -9,26 +11,36 @@ import { ReportService } from 'src/app/core/services/report.service';
 export class ScanComponent implements OnInit {
   commitID: string | null = null;
   tool: string | null = null;
-  constructor(private reportService: ReportService) { }
+  dataReport : DataReport[] | undefined = undefined;
+  constructor(private reportService: ReportService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.reportService.commitID.subscribe({
-      next: (result) =>{
-        this.commitID = result;
+    this.reportService.fetchDataReport().subscribe({
+      next: (result) => {
+        this.dataReport = result;
+        console.log(this.dataReport);
+        this.reportService.dataReport.next(this.dataReport);
+        this.reportService.dataReport.subscribe({
+          next: (result) => {
+            console.log(result);
+          }
+        })
       }
-    });
-    this.reportService.tool.subscribe({
-      next: (result) =>{
-        this.tool = result;
-      }
+    })
+    this.route.queryParams.subscribe(params=>{
+      this.commitID = params['id'];
+      this.tool = params['tool'];
+      console.log(this.tool);
+
     })
   }
 
   resetCommitID(){
-    this.reportService.setCommitID('');
+    this.commitID='';
   }
 
   resetTool(){
-    this.reportService.setTool('');
+    this.tool='';
+    this.route.queryParams.subscribe()
   }
 }

@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   angular:
+    image: ttv2412/management_web_fe
     container_name: angular-app
     build:
       context: .
@@ -9,6 +10,7 @@ services:
     env_file: ./.env
     environment:
       - API_URL=${API_URL}
+      - SONAR_URL=${SONAR_URL}
     # volumes:
     #   - ".:/app"
     #   - "/app/node_modules"

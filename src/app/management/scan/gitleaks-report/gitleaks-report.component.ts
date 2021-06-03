@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { GitleaksReport } from 'src/app/core/models/gitleaks';
 import { ReportService } from 'src/app/core/services/report.service';
@@ -11,21 +12,15 @@ export class GitleaksReportComponent implements OnInit {
   data: GitleaksReport[] | null = null;
   p: number = 1;
 
-  constructor(private reportService: ReportService) {}
+  constructor(private reportService: ReportService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.reportService.commitID.subscribe({
-      next: (id) => {
-        this.reportService.tool.subscribe({
-          next: (tool) =>{
-            this.reportService.fetchDetailReport(id,tool.toLowerCase()).subscribe({
-              next: (result) => {
-                this.data = result;
-              }
-            })
-          }
-        })
-      }
+    this.route.queryParams.subscribe(params=>{
+      this.reportService.fetchDetailReport(params['id'],params['tool']).subscribe({
+        next: (result)=>{
+          this.data=result;
+        }
+      })
     })
   }
 
