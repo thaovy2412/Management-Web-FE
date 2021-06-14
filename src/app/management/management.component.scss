@@ -1,5 +1,4 @@
 .management {
-  background-color: #f8f9fc;
   display: flex;
   #sidebar {
     width: 20%;
@@ -11,13 +10,16 @@
       font-size: 20px;
       font-weight: 500;
       text-align: center;
-      padding: 20px 16px;
-      background-color: #224abe;
-      .imgIcon {
-        border-radius: 50%;
-      }
-      p {
-        margin-top: 15px;
+      padding: 40px 20px;
+      position: relative;
+      &::after {
+        content: "";
+        background: rgba(255, 255, 255, 0.15);
+        height: 1px;
+        width: 90%;
+        bottom: 0;
+        left: 3%;
+        position: absolute;
       }
     }
     .menu {
@@ -53,7 +55,7 @@
           content: "";
           background: rgba(255, 255, 255, 0.15);
           height: 1px;
-          width: 94%;
+          width: 90%;
           bottom: 0;
           left: 3%;
           position: absolute;
@@ -69,13 +71,14 @@
     height: 100%;
     margin-left: 20%;
     .navbar {
-      padding: 11px;
+      padding: 18px;
       background-color: #fff;
       box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
       position: fixed;
       width: 80%;
       z-index: 100;
       .path {
+        color: #858796;
         margin-bottom: 0;
         .iconHome {
           margin-right: 10px;
@@ -88,31 +91,10 @@
           font-weight: 500;
         }
       }
-      form {
-        input {
-          background-color: #f8f9fc;
-          border: none;
-          &:focus {
-            box-shadow: none;
-          }
-        }
-        button {
-          background-color: #4e73df;
-          border-color: #4e73df;
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-          color: #fff;
-          transition: all 0.5s;
-          &:hover {
-            background-color: #2e59d9;
-            border-color: #2653d4;
-          }
-        }
-      }
     }
     .content__detail {
       margin-top: 60px;
-      padding: 24px;
+      padding: 35px;
     }
   }
 }

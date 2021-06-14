@@ -1,1 +1,112 @@
-<h1>Dashboard</h1>
+<div class="container dashboard">
+  <h1>Dashboard</h1>
+  <div class="row summary">
+    <div class="col-lg-6 col-xl-3">
+      <div class="card pass">
+        <div class="card-body">
+          <div class="text">
+            <p class="status">PASSES</p>
+            <p class="number">{{ pass }}</p>
+          </div>
+          <fa-icon [icon]="faPass"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3">
+      <div class="card running">
+        <div class="card-body">
+          <div class="text">
+            <p class="status">RUNNINGS</p>
+            <p class="number">{{ running }}</p>
+          </div>
+          <fa-icon [icon]="faRun"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3">
+      <div class="card fail">
+        <div class="card-body">
+          <div class="text">
+            <p class="status">FAILS</p>
+            <p class="number">{{ fail }}</p>
+          </div>
+          <fa-icon [icon]="faFail"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-3">
+      <div class="card total">
+        <div class="card-body">
+          <div class="text">
+            <p class="status">COMMITS</p>
+            <p class="number">{{ total }}</p>
+          </div>
+          <fa-icon [icon]="faTotal"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row chart">
+    <div class="col-xl-8 col-lg-7">
+      <div class="card chart1">
+        <div class="card-header">
+          <h4>WEEKLY COMMITS REPORT</h4>
+        </div>
+        <div class="card-body">
+          <div style="display: block">
+            <canvas
+              baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-5">
+      <div class="card chart2">
+        <div class="card-header">
+          <h4>COMMIT STATUS</h4>
+        </div>
+        <div class="card-body">
+          <div style="display: block">
+            <canvas
+              baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [plugins]="pieChartPlugins"
+              [legend]="pieChartLegend"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card scanners">
+    <div class="card-header">
+      <h4>LIST OF SCANNERS</h4>
+    </div>
+    <div class="card-body">
+      <div class="sonar tool">
+        <img src="../../../assets/sonar.svg" />
+      </div>
+      <div class="zap tool">
+        <img src="../../../assets/owasp-zap.png" />
+      </div>
+      <div class="gitleaks tool">
+        <img src="../../../assets/gitleaks.png" />
+      </div>
+      <div class="trivy tool">
+        <img src="../../../assets/trivy.png" />
+      </div>
+    </div>
+  </div>
+</div>

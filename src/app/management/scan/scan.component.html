@@ -1,33 +1,35 @@
-<h2>Tables</h2>
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur veniam quis
-  reiciendis ex earum, delectus quia at odit. Voluptates, quia?
-</p>
+<div class="pathCommit">
+  <span
+    *ngIf="commitID || tool"
+    [ngClass]="{ disabledClick: !commitID }"
+    (click)="resetCommitID()"
+    routerLink="/scan/commits"
+    >Commit</span
+  >
+  <span *ngIf="commitID" class="slash"> / </span>
+  <span
+    class="commitID"
+    (click)="resetTool()"
+    routerLink="/scan/commits"
+    [queryParams]="{ id: commitID }"
+    >{{ commitID }}</span
+  >
+  <span *ngIf="tool" class="slash"> / </span>
+  <span *ngIf="tool" class="tool">{{ tool }}</span>
+</div>
 <div class="card">
   <div class="card-header">
-    <h4>DataTables Example</h4>
+    <h4 *ngIf="!commitID && !tool">LIST OF COMMITS</h4>
+    <h4 *ngIf="commitID && !tool">LIST OF SCANNERS</h4>
+    <h4 *ngIf="commitID && tool">DETAIL REPORT</h4>
   </div>
   <div class="card-body">
-    <div class="pathCommit">
-      <span
-        [ngClass]="{ disabledClick: !commitID }"
-        (click)='resetCommitID()'
-        routerLink="/scan/commits"
-        >Commit</span
-      >
-      <span *ngIf="commitID" class="slash"> / </span>
-      <span class="commitID" (click)="resetTool()" routerLink="/scan/commits" [queryParams]="{id:commitID}"  >{{
-        commitID
-      }}</span>
-      <span *ngIf="tool" class="slash"> / </span>
-      <span *ngIf="tool" class="tool" >{{ tool }}</span>
-    </div>
     <app-commits-list *ngIf="!commitID"></app-commits-list>
     <app-tools-list *ngIf="commitID && !tool"></app-tools-list>
-    <app-gitleaks-report *ngIf="tool==='gitleaks'"></app-gitleaks-report>
-    <app-zap-baseline *ngIf="tool==='zap-baseline'"></app-zap-baseline>
-    <app-zap-report *ngIf="tool==='zap-quickscan'"></app-zap-report>
-    <app-trivy-report *ngIf="tool==='trivy'"></app-trivy-report>
-    <app-sonarqube-report *ngIf="tool==='sonarqube'"></app-sonarqube-report>
+    <app-gitleaks-report *ngIf="tool === 'gitleaks'"></app-gitleaks-report>
+    <app-zap-baseline *ngIf="tool === 'zap-baseline'"></app-zap-baseline>
+    <app-zap-report *ngIf="tool === 'zap-quickscan'"></app-zap-report>
+    <app-trivy-report *ngIf="tool === 'trivy'"></app-trivy-report>
+    <app-sonarqube-report *ngIf="tool === 'sonarqube'"></app-sonarqube-report>
   </div>
 </div>

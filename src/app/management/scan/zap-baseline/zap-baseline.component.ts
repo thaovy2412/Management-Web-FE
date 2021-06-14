@@ -1,13 +1,17 @@
 import { ActivatedRoute } from '@angular/router';
 import { ReportService } from './../../../core/services/report.service';
-import { ZapReportDetail, ZapReportOverView, ZapReportSummary } from './../../../core/models/zap';
+import {
+  ZapReportDetail,
+  ZapReportOverView,
+  ZapReportSummary,
+} from './../../../core/models/zap';
 import { Component, OnInit } from '@angular/core';
 import { ZapBaselineReport } from 'src/app/core/models/zap-baseline';
 
 @Component({
   selector: 'app-zap-baseline',
   templateUrl: './zap-baseline.component.html',
-  styleUrls: ['./zap-baseline.component.scss']
+  styleUrls: ['./zap-baseline.component.scss'],
 })
 export class ZapBaselineComponent implements OnInit {
   data: ZapBaselineReport | undefined = undefined;
@@ -31,24 +35,31 @@ export class ZapBaselineComponent implements OnInit {
     },
   ];
   levelDetail: string = '';
-  constructor(private reportService: ReportService, private route: ActivatedRoute) {}
+  constructor(
+    private reportService: ReportService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params=>{
-      this.reportService.fetchDetailReport(params['id'],params['tool']).subscribe({
-        next: (result)=>{
-          this.data = result;
-          this.data = result;
-          this.data.site[0].alerts.sort(
-            (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
-          );
-          this.overviewReport();
-          this.summaryReport();
-          console.log('overview',this.overviewZapReport);
-          console.log('summary', this.summaryAlerts);
-        }
-      })
-    })
+    this.route.queryParams.subscribe((params) => {
+      this.reportService
+        .fetchDetailReport(params['id'], params['tool'])
+        .subscribe({
+          next: (result) => {
+            console.log(result);
+
+            this.data = result;
+            this.data = result;
+            this.data.site[0].alerts.sort(
+              (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
+            );
+            this.overviewReport();
+            this.summaryReport();
+            console.log('overview', this.overviewZapReport);
+            console.log('summary', this.summaryAlerts);
+          },
+        });
+    });
   }
 
   overviewReport(): void {

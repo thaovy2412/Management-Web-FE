@@ -22,7 +22,11 @@
       data-parent="#accordionExample"
     >
       <div class="card-body">
-        <h3>Total: {{data.Summary.total}}  (UNKNOWN: {{data.Summary.unknown}},  LOW: {{data.Summary.low}},  MEDIUM: {{data.Summary.medium}},  HIGH: {{data.Summary.high}},  CRITICAL: {{data.Summary.critical}})</h3>
+        <h3>
+          Total: {{ data.Summary.total }} (UNKNOWN: {{ data.Summary.unknown }},
+          LOW: {{ data.Summary.low }}, MEDIUM: {{ data.Summary.medium }}, HIGH:
+          {{ data.Summary.high }}, CRITICAL: {{ data.Summary.critical }})
+        </h3>
         <table class="table table-bordered">
           <thead>
             <tr>

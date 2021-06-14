@@ -1,22 +1,28 @@
-<table class="table table-bordered" *ngFor="let line of data | paginate: {itemsPerPage: 1, currentPage: p}">
+<table
+  class="table table-bordered"
+  *ngFor="let line of data | paginate: { itemsPerPage: 1, currentPage: p }"
+>
   <tbody>
     <tr *ngFor="let item of line | keyvalue">
-      <th width="20%" scope="row">{{item.key}}</th>
-      <td *ngIf="!checkURL(item.key)">{{item.value}}</td>
-      <td *ngIf="checkURL(item.key)"><a target="_blank" [href]="item.value">{{item.value}}</a></td>
+      <th width="20%" scope="row">{{ item.key }}</th>
+      <td *ngIf="!checkURL(item.key)">{{ item.value }}</td>
+      <td *ngIf="checkURL(item.key)">
+        <a target="_blank" [href]="item.value">{{ item.value }}</a>
+      </td>
     </tr>
   </tbody>
 </table>
 <pagination-controls
-                      (pageChange)="pageChanged($event)"
-                      (pageBoundsCorrection)="pageChanged($event)"
-                      maxSize="9"
-                      directionLinks="true"
-                      autoHide="true"
-                      responsive="true"
-                      previousLabel="Previous"
-                      nextLabel="Next"
-                      screenReaderPaginationLabel="Pagination"
-                      screenReaderPageLabel="page"
-                      screenReaderCurrentLabel="You're on page">
+  (pageChange)="pageChanged($event)"
+  (pageBoundsCorrection)="pageChanged($event)"
+  maxSize="9"
+  directionLinks="true"
+  autoHide="true"
+  responsive="true"
+  previousLabel="Previous"
+  nextLabel="Next"
+  screenReaderPaginationLabel="Pagination"
+  screenReaderPageLabel="page"
+  screenReaderCurrentLabel="You're on page"
+>
 </pagination-controls>

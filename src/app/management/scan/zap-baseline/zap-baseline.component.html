@@ -1,4 +1,4 @@
-<h3>Generated on {{data['@generated']}}</h3>
+<h3>Generated on {{ data["@generated"] }}</h3>
 <div class="summaryAlerts">
   <h4>Summary of Alerts</h4>
   <table class="table table-bordered">
@@ -10,8 +10,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let level of summaryAlerts">
-        <td>{{level.riskLevel}}</td>
-        <td>{{level.numberAlerts}}</td>
+        <td>{{ level.riskLevel }}</td>
+        <td>{{ level.numberAlerts }}</td>
       </tr>
     </tbody>
   </table>
@@ -28,9 +28,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let alert of overviewZapReport">
-        <td>{{alert.name}}</td>
-        <td>{{alert.riskLevel}}</td>
-        <td>{{alert.numberInstances}}</td>
+        <td>{{ alert.name }}</td>
+        <td>{{ alert.riskLevel }}</td>
+        <td>{{ alert.numberInstances }}</td>
       </tr>
     </tbody>
   </table>
@@ -40,17 +40,36 @@
   <h4>Alert Detail</h4>
   <div id="accordion">
     <div *ngFor="let level of summaryAlerts" class="card">
-      <div [ngClass]="level.riskLevel.toLowerCase()" class="card-header" id="headingThree">
+      <div
+        [ngClass]="level.riskLevel.toLowerCase()"
+        class="card-header"
+        id="headingThree"
+      >
         <h5 class="mb-0">
-          <button (click)="setLevelDetail(level.riskLevel)" class="btn btn-link collapsed" data-toggle="collapse" [attr.data-target]="'#'+level.riskLevel" aria-expanded="false" aria-controls="collapseThree">
-            {{level.riskLevel}} ({{level.numberAlerts}})
+          <button
+            (click)="setLevelDetail(level.riskLevel)"
+            class="btn btn-link collapsed"
+            data-toggle="collapse"
+            [attr.data-target]="'#' + level.riskLevel"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            {{ level.riskLevel }} ({{ level.numberAlerts }})
           </button>
         </h5>
       </div>
-      <div [id]="level.riskLevel" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div
+        [id]="level.riskLevel"
+        class="collapse"
+        aria-labelledby="headingThree"
+        data-parent="#accordion"
+      >
         <div class="card-body">
           <ng-container *ngFor="let item of data.site[0].alerts">
-            <table *ngIf="item.riskcode===levelDetail" class="table table-bordered">
+            <table
+              *ngIf="item.riskcode === levelDetail"
+              class="table table-bordered"
+            >
               <thead>
                 <tr>
                   <th width="20%">{{ item.riskdesc }}</th>
@@ -120,4 +139,3 @@
     </div>
   </div>
 </div>
-

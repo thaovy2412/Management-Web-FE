@@ -1,18 +1,27 @@
 <section class="management">
   <nav id="sidebar">
     <div class="sidebar-brand">
-      <img class="imgIcon" src="../../assets/icon.jpg" width="80" height="80">
-      <p>User</p>
+      <fa-icon [icon]="faDb"></fa-icon>
+      DevSecOps Dashboard
     </div>
     <ul class="menu">
-      <li routerLink=''
-        (click)="setOption('Dashboard')"
+      <li
+        routerLink=""
+        (click)="setOption('DASHBOARD')"
         [class]="{ active: option === 'Dashboard' }"
       >
-        <a routerLink='' (click)="setOption('Dashboard')"><mat-icon>dashboard</mat-icon> Dashboard</a>
+        <a routerLink="" (click)="setOption('DASHBOARD')"
+          ><mat-icon>dashboard</mat-icon> Dashboard</a
+        >
       </li>
-      <li routerLink='/scan/commits' (click)="setOption('Scan Report')" [class]="{ active: option === 'Scan Report' }">
-        <a routerLink='/scan/commits' (click)="setOption('Scan Report')"><mat-icon>report</mat-icon> Scan Report</a>
+      <li
+        routerLink="/scan/commits"
+        (click)="setOption('SCANNING REPORTS')"
+        [class]="{ active: option === 'Scan Report' }"
+      >
+        <a routerLink="/scan/commits" (click)="setOption('SCANNING REPORTS')"
+          ><mat-icon>report</mat-icon> Scanning Reports</a
+        >
       </li>
     </ul>
   </nav>
@@ -20,25 +29,12 @@
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <p class="path">
-          <fa-icon class="iconHome" [icon]="faHome"></fa-icon>Home<fa-icon
-            [icon]="faRight" class="iconRight"
+          <fa-icon class="iconHome" [icon]="faHome"></fa-icon>HOME<fa-icon
+            [icon]="faRight"
+            class="iconRight"
           ></fa-icon
           ><span>{{ option }}</span>
         </p>
-        <form>
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search for..."
-            />
-            <div class="input-group-btn">
-              <button class="btn btn-default">
-                <fa-icon [icon]="faSearch"></fa-icon>
-              </button>
-            </div>
-          </div>
-        </form>
       </div>
     </nav>
     <div class="content__detail">

@@ -35,21 +35,28 @@ export class ZapReportComponent implements OnInit {
     },
   ];
   levelDetail: string = '';
-  constructor(private reportService: ReportService, private route: ActivatedRoute) {}
+  constructor(
+    private reportService: ReportService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params=>{
-      this.reportService.fetchDetailReport(params['id'],params['tool']).subscribe({
-        next: (result)=>{
-          this.data = result;
-                  this.data.OWASPZAPReport?.site[0].alerts[0].alertitem.sort(
-                    (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
-                  );
-                  this.overviewReport();
-                  this.summaryReport();
-        }
-      })
-    })
+    this.route.queryParams.subscribe((params) => {
+      this.reportService
+        .fetchDetailReport(params['id'], params['tool'])
+        .subscribe({
+          next: (result) => {
+            this.data = result;
+            console.log(this.data);
+
+            this.data.OWASPZAPReport?.site[0].alerts[0].alertitem.sort(
+              (a, b) => parseInt(b.riskcode[0]) - parseInt(a.riskcode[0])
+            );
+            this.overviewReport();
+            this.summaryReport();
+          },
+        });
+    });
   }
 
   overviewReport(): void {

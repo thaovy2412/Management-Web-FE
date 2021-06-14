@@ -1,14 +1,17 @@
 .table {
   margin-top: 15px;
-  color: #858796;
   table-layout: fixed;
+  border: 2px solid #c8e1ff !important;
   tbody {
     tr {
-      th{
+      th {
         vertical-align: middle;
+        background-color: #f1f8ff;
+        border: 2px solid #c8e1ff !important;
       }
       td {
         vertical-align: middle;
+        border: 2px solid #c8e1ff !important;
       }
     }
   }

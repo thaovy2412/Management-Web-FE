@@ -5,28 +5,27 @@ export interface ZapReportOverView {
   numberInstances: string;
 }
 
-export interface ZapReportSummary{
+export interface ZapReportSummary {
   riskLevel: string;
   numberAlerts: string;
 }
-
 
 export interface ZapReportDetail {
   OWASPZAPReport: OWASPZAPReport;
 }
 
 export interface OWASPZAPReport {
-  $:    OWASPZAPReportClass;
+  $: OWASPZAPReportClass;
   site: SiteElement[];
 }
 
 export interface OWASPZAPReportClass {
-  version:   string;
+  version: string;
   generated: string;
 }
 
 export interface SiteElement {
-  $:      Site;
+  $: Site;
   alerts: Alert[];
 }
 
@@ -34,7 +33,7 @@ export interface Site {
   name: string;
   host: string;
   port: string;
-  ssl:  string;
+  ssl: string;
 }
 
 export interface Alert {
@@ -42,21 +41,21 @@ export interface Alert {
 }
 
 export interface Alertitem {
-  pluginid:   string[];
-  alertRef:   string[];
-  alert:      string[];
-  name:       string[];
-  riskcode:   string[];
+  pluginid: string[];
+  alertRef: string[];
+  alert: string[];
+  name: string[];
+  riskcode: string[];
   confidence: string[];
-  riskdesc:   string[];
-  desc:       string[];
-  instances:  AlertitemInstance[];
-  count:      string[];
-  solution:   string[];
-  reference:  string[];
-  cweid:      string[];
-  wascid:     string[];
-  sourceid:   string[];
+  riskdesc: string[];
+  desc: string[];
+  instances: AlertitemInstance[];
+  count: string[];
+  solution: string[];
+  reference: string[];
+  cweid: string[];
+  wascid: string[];
+  sourceid: string[];
   otherinfo?: string[];
 }
 
@@ -65,13 +64,19 @@ export interface AlertitemInstance {
 }
 
 export interface InstanceInstance {
-  uri:       string[];
-  method:    Method[];
-  param?:    string[];
+  uri: string[];
+  method: Method[];
+  param?: string[];
   evidence?: string[];
-  attack?:   string[];
+  attack?: string[];
 }
 
 export enum Method {
-  Get = "GET",
+  Get = 'GET',
+}
+
+export interface ZapQuickScanExcel {
+  Alert: string;
+  RiskLevel: string;
+  Instance: string;
 }

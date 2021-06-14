@@ -1,1 +1,110 @@
-
+.dashboard {
+  h1 {
+    font-weight: 500;
+  }
+  margin-top: 20px;
+  .summary {
+    color: #fff;
+    .card {
+      border-radius: 10px;
+      border: 1px solid rgba(33, 40, 50, 0.125);
+      box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+      &.pass {
+        background-color: #00ac69;
+      }
+      &.fail {
+        background-color: #e81500;
+      }
+      &.total {
+        background-color: #f4a100;
+      }
+      &.running {
+        background-color: #0061f2;
+      }
+      .card-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .text {
+          .status {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+          }
+          .number {
+            font-size: 24px;
+          }
+        }
+        fa-icon {
+          font-size: 26px;
+          color: rgba(255, 255, 255, 0.75);
+        }
+      }
+    }
+  }
+  .chart {
+    margin-top: 60px;
+    .card {
+      border: 1px solid #e3e6f0;
+      box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+      .card-header {
+        padding: 16px 30px;
+        h4 {
+          font-size: 14px;
+          font-weight: 500;
+          color: #4e73df;
+          margin-bottom: 0;
+        }
+        border-bottom: 1px solid #e3e6f0;
+      }
+      &.chart2 {
+        height: 100%;
+        .card-body {
+          canvas {
+            margin-top: 25%;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .scanners {
+    margin-top: 60px;
+    border: 1px solid #e3e6f0;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    .card-header {
+      padding: 16px 30px;
+      h4 {
+        font-size: 14px;
+        font-weight: 500;
+        color: #4e73df;
+        margin-bottom: 0;
+      }
+      border-bottom: 1px solid #e3e6f0;
+    }
+    .card-body {
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      .tool {
+        padding: 15px;
+        border-radius: 10px;
+        &.sonar {
+          border: 2px solid #f4a100;
+        }
+        &.zap {
+          border: 2px solid #e81500;
+        }
+        &.gitleaks {
+          border: 2px solid #00ac69;
+        }
+        &.trivy {
+          border: 2px solid #0061f2;
+        }
+        img {
+          width: 200px;
+          height: 160px;
+        }
+      }
+    }
+  }
+}

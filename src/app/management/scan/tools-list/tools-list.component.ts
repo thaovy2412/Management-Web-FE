@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tool } from 'src/app/core/models/commits';
 import { ReportService } from 'src/app/core/services/report.service';
 import { environment } from '../../../../environments/environment';
+import { faListAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tools-list',
@@ -13,6 +14,7 @@ export class ToolsListComponent implements OnInit {
   selectedCommitDetail: Tool[] = [];
   commitid: string = '';
   sonarUrl: string = environment.sonarUrl + '/dashboard?id=web-app';
+  faDetail = faListAlt;
   constructor(
     private reportService: ReportService,
     private route: ActivatedRoute

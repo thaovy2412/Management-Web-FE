@@ -1,37 +1,100 @@
+<form [formGroup]="searchForm" (ngSubmit)="handleSearch()">
+  <div class="input-group">
+    <input
+      formControlName="key"
+      type="text"
+      class="form-control"
+      placeholder="Search for ..."
+    />
+    <div class="input-group-btn">
+      <button class="btn btn-default">
+        <fa-icon [icon]="faSearch"></fa-icon>
+      </button>
+    </div>
+  </div>
+</form>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Commit ID</th>
       <th>Status</th>
       <th>Date Time</th>
-      <th></th>
+      <th class="func">Report</th>
+      <th class="func">Detail</th>
     </tr>
   </thead>
   <tbody>
-    <tr
-      *ngFor="
-        let commit of dataReport | paginate: { itemsPerPage: 5, currentPage: p }
-      "
-    >
-      <td>{{ commit.commitid }}</td>
-      <td class="status">
-        <p [class]="commit.status">{{ commit.status }}</p>
-      </td>
-      <td>{{ commit.date | date: "dd/MM/yyyy HH:mm:ss":"UTC" }}</td>
-      <td>
-        <button
-          routerLink="/scan/commits"
-          [queryParams]="{ id: commit.commitid }"
-          class="btn"
-        >
-          Detail
-        </button>
-      </td>
-    </tr>
+    <ng-container *ngIf="dataReport.length >= 1; else noData">
+      <tr
+        *ngFor="
+          let commit of dataReport
+            | paginate: { itemsPerPage: 5, currentPage: p }
+        "
+      >
+        <td>{{ commit.commitid }}</td>
+        <td class="status">
+          <div *ngIf="commit.status !== 'running'" class="progress">
+            <div
+              class="progress-bar progress-bar-striped"
+              [ngClass]="{
+                'bg-success': commit.status === 'pass',
+                'bg-danger': commit.status === 'fail'
+              }"
+              role="progressbar"
+              style="width: 100%"
+              aria-valuenow="25"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ commit.status | uppercase }}
+            </div>
+          </div>
+          <div *ngIf="commit.status === 'running'" class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width: 100%"
+            >
+              {{ commit.status | uppercase }}
+            </div>
+          </div>
+        </td>
+        <td>{{ commit.date | date: "dd/MM/yyyy HH:mm:ss":"UTC" }}</td>
+        <td>
+          <button
+            *ngIf="commit.status === 'fail' || commit.status === 'pass'"
+            class="btn btn-outline-success btnReport"
+            (click)="handleExport(commit.commitid)"
+          >
+            <fa-icon [icon]="faFileDownload"></fa-icon>
+          </button>
+        </td>
+        <td>
+          <button
+            routerLink="/scan/commits"
+            [queryParams]="{ id: commit.commitid }"
+            class="btn btn-warning"
+          >
+            <fa-icon [icon]="faDetail"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-template #noData>
+      <tr class="noData">
+        <td colspan="4" class="text-center font-weight-bold">
+          * No matching results
+        </td>
+      </tr>
+    </ng-template>
   </tbody>
 </table>
 
 <pagination-controls
+  *ngIf="dataReport.length >= 1"
   (pageChange)="pageChanged($event)"
   (pageBoundsCorrection)="pageChanged($event)"
   maxSize="9"

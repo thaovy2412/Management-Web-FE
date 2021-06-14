@@ -11,15 +11,26 @@ import { GitleaksReportComponent } from './gitleaks-report/gitleaks-report.compo
 import { SonarqubeReportComponent } from './sonarqube-report/sonarqube-report.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ZapBaselineComponent } from './zap-baseline/zap-baseline.component';
-
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ScanComponent, CommitsListComponent, ToolsListComponent, ZapReportComponent, TrivyReportComponent, GitleaksReportComponent, SonarqubeReportComponent, ZapBaselineComponent],
+  declarations: [
+    ScanComponent,
+    CommitsListComponent,
+    ToolsListComponent,
+    ZapReportComponent,
+    TrivyReportComponent,
+    GitleaksReportComponent,
+    SonarqubeReportComponent,
+    ZapBaselineComponent,
+  ],
   imports: [
     CommonModule,
     ScanRoutingModule,
-    NgxPaginationModule
-  ]
+    NgxPaginationModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+  ],
 })
-export class ScanModule { }
+export class ScanModule {}

@@ -1,5 +1,7 @@
 .accordion {
   .card {
+    border: none;
+    border: 1px solid transparent;
     .card-header {
       background-color: #4e73df;
       h2 {
@@ -12,18 +14,20 @@
       }
     }
     .card-body {
-      h3{
+      h3 {
         font-weight: 500;
       }
       .table {
         margin-top: 15px;
-        color: #858796;
         text-align: center;
         table-layout: fixed;
-        thead{
-          tr{
-            th{
-              &:last-child{
+        border: 2px solid #c8e1ff !important;
+        thead {
+          tr {
+            th {
+              background-color: #f1f8ff;
+              border: 2px solid #c8e1ff !important;
+              &:last-child {
                 width: 30%;
               }
             }
@@ -32,8 +36,9 @@
         tbody {
           tr {
             td {
+              border: 2px solid #c8e1ff !important;
               vertical-align: middle;
-              &:last-child{
+              &:last-child {
                 text-align: left;
               }
             }
@@ -49,7 +54,7 @@
           }
         }
       }
-      pagination-controls{
+      pagination-controls {
         text-align: end;
       }
     }

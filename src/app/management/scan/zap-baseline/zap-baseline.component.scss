@@ -1,35 +1,50 @@
-h3{
+h3 {
   text-align: right;
   color: #000;
   font-weight: 500;
+  font-style: italic;
 }
-h4{
+h4 {
   color: #000;
-  font-weight: 500;
+  font-weight: 600;
 }
 .table {
   table-layout: fixed;
   margin-top: 15px;
-  color: #858796;
   text-align: center;
+  border: 2px solid #c8e1ff !important;
+  thead {
+    th {
+      background-color: #f1f8ff;
+      border: 2px solid #c8e1ff !important;
+    }
+  }
   tbody {
     tr {
       td {
         vertical-align: middle;
+        border: 2px solid #c8e1ff !important;
       }
     }
   }
 }
 
-.summaryAlerts{
+.summaryAlerts {
   margin-bottom: 50px;
-  .table{
+  .table {
     width: 50%;
-    tbody{
-      tr{
-        td{
-          &:first-child{
+    thead {
+      th {
+        background-color: #f1f8ff;
+        border: 2px solid #c8e1ff !important;
+      }
+    }
+    tbody {
+      tr {
+        td {
+          &:first-child {
             text-align: left;
+            border: 2px solid #c8e1ff !important;
           }
         }
       }
@@ -37,14 +52,21 @@ h4{
   }
 }
 
-.alerts{
+.alerts {
   margin-bottom: 50px;
-  .table{
+  .table {
+    thead {
+      background-color: #f1f8ff;
+      th {
+        border: 2px solid #c8e1ff !important;
+      }
+    }
     width: 85%;
-    tbody{
-      tr{
-        td{
-          &:first-child{
+    tbody {
+      tr {
+        td {
+          border: 2px solid #c8e1ff !important;
+          &:first-child {
             text-align: left;
           }
         }
@@ -53,32 +75,33 @@ h4{
   }
 }
 
-.alertDetail{
-  #accordion{
-    .card{
-      .card-header{
-        &.high{
-          background-color: red;
+.alertDetail {
+  #accordion {
+    .card {
+      border: none;
+      .card-header {
+        &.high {
+          background-color: #dc3545;
         }
-        &.medium{
-          background-color: orange;
+        &.medium {
+          background-color: #28a745;
         }
-        &.low{
-          background-color: yellow;
-          h5{
-            button{
+        &.low {
+          background-color: #ffc107;
+          h5 {
+            button {
               color: black;
             }
           }
         }
-        &.informational{
-          background-color: blue;
+        &.informational {
+          background-color: #17a2b8;
         }
-        h5{
-          button{
-            color: white;
+        h5 {
+          button {
+            color: #000;
             font-weight: 500;
-            &:focus{
+            &:focus {
               box-shadow: none;
             }
           }
@@ -86,7 +109,7 @@ h4{
       }
     }
   }
-  .table{
+  .table {
     text-align: left;
     margin-bottom: 50px;
   }
