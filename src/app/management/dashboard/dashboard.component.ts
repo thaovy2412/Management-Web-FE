@@ -33,6 +33,11 @@ export class DashboardComponent implements OnInit {
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
+  public pieChartColors: Array<any> = [
+    {
+      backgroundColor: ['#dc3545', '#28a745', '#007bff'],
+    },
+  ];
   public pieChartLabels: Label[] = ['Fail', 'Pass', 'Running'];
   public pieChartData: SingleDataSet = [300, 500, 200];
   public pieChartType: ChartType = 'pie';
@@ -50,10 +55,36 @@ export class DashboardComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
+  options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            userCallback: function (label, index, labels) {
+              if (Math.floor(label) === label) {
+                return label;
+              }
+            },
+          },
+        },
+      ],
+    },
+  };
 
   public barChartData: ChartDataSets[] = [
-    { data: [], label: 'Fail' },
-    { data: [], label: 'Pass' },
+    {
+      data: [],
+      label: 'Fail',
+      backgroundColor: '#dc3545',
+      hoverBackgroundColor: '#c82333',
+    },
+    {
+      data: [],
+      label: 'Pass',
+      backgroundColor: '#28a745',
+      hoverBackgroundColor: '#218838',
+    },
   ];
 
   ngOnInit(): void {
@@ -73,6 +104,28 @@ export class DashboardComponent implements OnInit {
         });
         this.total = this.pass + this.fail + this.running;
         this.pieChartData = [this.fail, this.pass, this.running];
+        this.pieChartOptions = {
+          responsive: true,
+          tooltips: {
+            callbacks: {
+              label: (tooltipItem, data) => {
+                const x =
+                  (+data['datasets'][0]['data'][tooltipItem['index']] /
+                    this.total) *
+                  100;
+                let result;
+                if (x % 1 === 0) {
+                  result = x;
+                } else {
+                  result = x.toFixed(2);
+                }
+                return (
+                  data['labels'][tooltipItem['index']] + ': ' + result + '%'
+                );
+              },
+            },
+          },
+        };
       },
     });
     this.reportService.chart().subscribe({

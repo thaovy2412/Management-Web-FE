@@ -1,7 +1,7 @@
 <div class="container dashboard">
-  <h1>Dashboard</h1>
+  <h1>DASHBOARD</h1>
   <div class="row summary">
-    <div class="col-lg-6 col-xl-3">
+    <div class="col-3">
       <div class="card pass">
         <div class="card-body">
           <div class="text">
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-xl-3">
+    <div class="col-3">
       <div class="card running">
         <div class="card-body">
           <div class="text">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-xl-3">
+    <div class="col-3">
       <div class="card fail">
         <div class="card-body">
           <div class="text">
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-xl-3">
+    <div class="col-3">
       <div class="card total">
         <div class="card-body">
           <div class="text">
@@ -62,6 +62,7 @@
               [plugins]="barChartPlugins"
               [legend]="barChartLegend"
               [chartType]="barChartType"
+              [options]="options"
             >
             </canvas>
           </div>
@@ -83,6 +84,7 @@
               [options]="pieChartOptions"
               [plugins]="pieChartPlugins"
               [legend]="pieChartLegend"
+              [colors]="pieChartColors"
             >
             </canvas>
           </div>
@@ -95,17 +97,29 @@
       <h4>LIST OF SCANNERS</h4>
     </div>
     <div class="card-body">
-      <div class="sonar tool">
-        <img src="../../../assets/sonar.svg" />
-      </div>
-      <div class="zap tool">
-        <img src="../../../assets/owasp-zap.png" />
-      </div>
-      <div class="gitleaks tool">
-        <img src="../../../assets/gitleaks.png" />
-      </div>
-      <div class="trivy tool">
-        <img src="../../../assets/trivy.png" />
+      <div class="container">
+        <div class="row">
+          <div class="toolList col-lg-6 col-xl-3">
+            <div class="sonar tool">
+              <img src="../../../assets/sonar.svg" />
+            </div>
+          </div>
+          <div class="toolList col-lg-6 col-xl-3">
+            <div class="zap tool">
+              <img src="../../../assets/owasp-zap.png" />
+            </div>
+          </div>
+          <div class="toolList col-lg-6 col-xl-3">
+            <div class="gitleaks tool">
+              <img src="../../../assets/gitleaks.png" />
+            </div>
+          </div>
+          <div class="toolList col-lg-6 col-xl-3">
+            <div class="trivy tool">
+              <img src="../../../assets/trivy.png" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

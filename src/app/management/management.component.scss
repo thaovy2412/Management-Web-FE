@@ -98,3 +98,11 @@
     }
   }
 }
+
+@media screen and (max-width: 1375px) {
+  .sidebar-brand {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+  }
+}
