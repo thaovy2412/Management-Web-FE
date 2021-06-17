@@ -34,6 +34,16 @@ export class ReportService {
   //   return this.http.get<DataChart[]>(url);
   // }
 
+  // updateStatusTool(id: string, tool: string, status): Observable<any> {
+  //   const url = `http://localhost:3000/api/commit?id=${id}&tool=${tool}&status=${status}`;
+  //   return this.http.get<any>(url);
+  // }
+
+  // updateStatusCommit(id: string): Observable<any> {
+  //   const url = `http://localhost:3000/api/commit?id=${id}&check=end`;
+  //   return this.http.get<any>(url);
+  // }
+
   fetchDetailReport(id: string, tool: string): Observable<any> {
     const url = `${environment.apiUrl}/detailreport?commitid=${id}&tool=${tool}`;
     return this.http.get<any>(url);
@@ -52,6 +62,16 @@ export class ReportService {
   chart(): Observable<DataChart[]> {
     const url = `${environment.apiUrl}/chart`;
     return this.http.get<DataChart[]>(url);
+  }
+
+  updateStatusTool(id: string, tool: string, status): Observable<any> {
+    const url = `${environment.apiUrl}/api/commit?id=${id}&tool=${tool}&status=${status}`;
+    return this.http.get<any>(url);
+  }
+
+  updateStatusCommit(id: string): Observable<any> {
+    const url = `${environment.apiUrl}/api/commit?id=${id}&check=end`;
+    return this.http.get<any>(url);
   }
 
   setCommitID(id: string) {

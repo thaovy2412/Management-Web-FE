@@ -10,6 +10,9 @@
       &:first-child {
         width: 50%;
       }
+      &:nth-child(2) {
+        width: 25%;
+      }
     }
   }
   tbody {
@@ -40,6 +43,14 @@
         &.high {
           p {
             background-color: #dc3545;
+          }
+        }
+        &:last-child {
+          .dropdown-menu {
+            .disabledA {
+              pointer-events: none;
+              color: #21252952;
+            }
           }
         }
       }

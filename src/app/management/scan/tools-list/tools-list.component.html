@@ -3,6 +3,7 @@
     <th>Scanners</th>
     <th>Status</th>
     <th>Detail</th>
+    <th>Options</th>
   </thead>
   <tbody>
     <tr *ngFor="let tool of selectedCommitDetail">
@@ -55,6 +56,36 @@
         >
           <fa-icon [icon]="faDetail"></fa-icon>
         </button>
+      </td>
+      <td>
+        <div class="dropdown">
+          <button
+            class="btn btn-dark"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <fa-icon [icon]="faOptions"></fa-icon>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button
+              class="dropdown-item font-weight-bold"
+              [ngClass]="{ disabledA: tool.status === 'pass' }"
+              (click)="onChangeStatus(tool.name, 'pass')"
+            >
+              PASS
+            </button>
+            <button
+              class="dropdown-item font-weight-bold"
+              [ngClass]="{ disabledA: tool.status === 'fail' }"
+              (click)="onChangeStatus(tool.name, 'fail')"
+            >
+              FAIL
+            </button>
+          </div>
+        </div>
       </td>
     </tr>
   </tbody>

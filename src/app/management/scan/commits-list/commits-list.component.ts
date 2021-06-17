@@ -43,6 +43,11 @@ export class CommitsListComponent implements OnInit {
   ngOnInit(): void {
     this.reportService.dataReport.subscribe({
       next: (result) => {
+        console.log(result);
+
+        result.sort((a, b) => {
+          return +new Date(b.date) - +new Date(a.date);
+        });
         this.dataReport = result;
       },
     });

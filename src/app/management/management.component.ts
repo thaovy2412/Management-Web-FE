@@ -26,7 +26,7 @@ export class ManagementComponent implements OnInit {
   ngOnInit(): void {
     this.url = this.router.url;
     if (this.url.includes('scan/commits')) {
-      this.option = 'Scan Report';
+      this.option = 'SCANNING REPORTS';
     }
   }
   setOption(option: string) {

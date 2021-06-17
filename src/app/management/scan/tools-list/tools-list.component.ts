@@ -1,9 +1,9 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Tool } from 'src/app/core/models/commits';
 import { ReportService } from 'src/app/core/services/report.service';
 import { environment } from '../../../../environments/environment';
-import { faListAlt } from '@fortawesome/free-solid-svg-icons';
+import { faListAlt, faCog } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tools-list',
@@ -15,9 +15,11 @@ export class ToolsListComponent implements OnInit {
   commitid: string = '';
   sonarUrl: string = environment.sonarUrl + '/dashboard?id=web-app';
   faDetail = faListAlt;
+  faOptions = faCog;
   constructor(
     private reportService: ReportService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +72,42 @@ export class ToolsListComponent implements OnInit {
 
   setTool(tool: string) {
     this.reportService.setTool(tool);
+  }
+
+  onChangeStatus(tool: string, status: string) {
+    const toolClone = tool.toLowerCase().replace(' ', '_');
+    this.reportService
+      .updateStatusTool(this.commitid, toolClone, status)
+      .subscribe({
+        next: () => {
+          this.reportService.updateStatusCommit(this.commitid).subscribe({
+            next: () => {
+              this.reload();
+            },
+            error: () => {
+              this.reload();
+            },
+          });
+        },
+        error: () => {
+          this.reportService.updateStatusCommit(this.commitid).subscribe({
+            next: () => {
+              this.reload();
+            },
+            error: () => {
+              this.reload();
+            },
+          });
+        },
+      });
+  }
+
+  reload() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/scan/commits'], {
+        queryParams: { id: this.commitid },
+      });
+    });
   }
 }
