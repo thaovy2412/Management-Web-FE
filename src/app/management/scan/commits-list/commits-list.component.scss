@@ -1,31 +1,36 @@
-form {
-  width: 30%;
-  margin-left: 70%;
-  input {
-    background-color: #f8f9fc;
-    border: none;
-    font-size: 14px;
-    height: calc(1.5em + 0.75rem + 5px);
-    &:focus {
-      box-shadow: none;
+.support {
+  display: flex;
+  justify-content: space-between;
+  form {
+    // width: 30%;
+    // margin-left: 70%;
+    input {
+      background-color: #f8f9fc;
+      border: none;
+      font-size: 14px;
+      height: calc(1.5em + 0.75rem + 5px);
+      &:focus {
+        box-shadow: none;
+      }
     }
-  }
-  button {
-    background-color: #4e73df;
-    border-color: #4e73df;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    color: #fff;
-    transition: all 0.5s;
-    &:hover {
-      background-color: #2e59d9;
-      border-color: #2653d4;
-    }
-    &:focus {
-      box-shadow: none;
+    button {
+      background-color: #4e73df;
+      border-color: #4e73df;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      color: #fff;
+      transition: all 0.5s;
+      &:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+      }
+      &:focus {
+        box-shadow: none;
+      }
     }
   }
 }
+
 .table {
   margin-top: 15px;
   text-align: center;
@@ -37,7 +42,7 @@ form {
       background-color: #f1f8ff;
       border: 2px solid #c8e1ff !important;
       &:first-child {
-        width: 45%;
+        width: 40%;
       }
       &.func {
         width: 10%;

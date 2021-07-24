@@ -1,5 +1,6 @@
 export interface DataReport {
   commitid: string;
+  repo: string;
   date: Date;
   status: string;
   zap_baseline: string;

@@ -21,10 +21,12 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./commits-list.component.scss'],
 })
 export class CommitsListComponent implements OnInit {
+  repoList: string[] = [];
   faFileDownload = faFileDownload;
   faSearch = faSearch;
   faDetail = faListAlt;
   dataReport: DataReport[] | undefined = undefined;
+  dataReportClone: DataReport[] | undefined = undefined;
   p: number = 1;
   s: boolean = false;
   tsummary: SummaryExcel[] = [];
@@ -35,6 +37,7 @@ export class CommitsListComponent implements OnInit {
   searchForm: FormGroup = new FormGroup({
     key: new FormControl(''),
   });
+  selectedRepo!: string;
   constructor(
     private reportService: ReportService,
     private exportService: ExportService
@@ -43,12 +46,12 @@ export class CommitsListComponent implements OnInit {
   ngOnInit(): void {
     this.reportService.dataReport.subscribe({
       next: (result) => {
-        console.log(result);
-
         result.sort((a, b) => {
           return +new Date(b.date) - +new Date(a.date);
         });
         this.dataReport = result;
+        this.dataReportClone = result;
+        this.repoList = [...new Set(result.map((item) => item.repo))];
       },
     });
     this.onChangeSearch();
@@ -426,19 +429,21 @@ export class CommitsListComponent implements OnInit {
   onChangeSearch() {
     this.searchForm.valueChanges.subscribe((val) => {
       this.p = 1;
-      if (val === '') {
-        this.reportService.fetchDataReport().subscribe({
-          next: (result) => {
-            this.dataReport = result;
-          },
-        });
-      } else {
-        this.reportService.search(val.key).subscribe({
-          next: (searchResult) => {
-            this.dataReport = searchResult;
-          },
-        });
-      }
+      this.reportService.search(val.key).subscribe({
+        next: (searchResult) => {
+          this.dataReport = searchResult.filter(
+            (item) => item.repo === this.selectedRepo
+          );
+        },
+      });
     });
+  }
+
+  handleSelect(event) {
+    this.selectedRepo = event.value;
+    this.dataReport = this.dataReportClone;
+    this.dataReport = this.dataReport.filter(
+      (item) => item.repo === event.value
+    );
   }
 }

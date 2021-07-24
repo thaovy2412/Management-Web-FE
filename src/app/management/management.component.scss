@@ -91,6 +91,18 @@
           font-weight: 500;
         }
       }
+      .account {
+        .btn {
+          padding: 0;
+          img {
+            border-radius: 50%;
+            margin-right: 10px;
+          }
+        }
+        .dropdown-menu {
+          cursor: pointer;
+        }
+      }
     }
     .content__detail {
       margin-top: 60px;

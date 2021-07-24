@@ -35,6 +35,24 @@
           ></fa-icon
           ><span>{{ option }}</span>
         </p>
+        <div class="dropdown account infoUser">
+          <button
+            class="btn dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img src="../../assets/avatar.png" width="30" />
+            {{ currentUser }}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)="handleLogOut()"
+              ><fa-icon [icon]="faSignOut"></fa-icon> Log Out</a
+            >
+          </div>
+        </div>
       </div>
     </nav>
     <div class="content__detail">

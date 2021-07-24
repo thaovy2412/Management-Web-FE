@@ -1,22 +1,33 @@
-<form [formGroup]="searchForm" (ngSubmit)="handleSearch()">
-  <div class="input-group">
-    <input
-      formControlName="key"
-      type="text"
-      class="form-control"
-      placeholder="Search for ..."
-    />
-    <div class="input-group-btn">
-      <button class="btn btn-default">
-        <fa-icon [icon]="faSearch"></fa-icon>
-      </button>
+<div class="support">
+  <mat-form-field appearance="fill">
+    <mat-label>Select A Repository</mat-label>
+    <mat-select (selectionChange)="handleSelect($event)">
+      <mat-option *ngFor="let repo of repoList" [value]="repo">
+        {{ repo }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <form [formGroup]="searchForm" (ngSubmit)="handleSearch()">
+    <div class="input-group">
+      <input
+        formControlName="key"
+        type="text"
+        class="form-control"
+        placeholder="Search for ..."
+      />
+      <div class="input-group-btn">
+        <button class="btn btn-default">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Commit ID</th>
+      <th>Repository</th>
       <th>Status</th>
       <th>Date Time</th>
       <th class="func">Report</th>
@@ -32,6 +43,7 @@
         "
       >
         <td>{{ commit.commitid }}</td>
+        <td>{{ commit.repo }}</td>
         <td class="status">
           <div *ngIf="commit.status !== 'running'" class="progress">
             <div
@@ -85,7 +97,7 @@
     </ng-container>
     <ng-template #noData>
       <tr class="noData">
-        <td colspan="5" class="text-center font-weight-bold">
+        <td colspan="6" class="text-center font-weight-bold">
           * No matching results
         </td>
       </tr>
